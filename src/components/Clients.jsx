@@ -110,12 +110,12 @@ const LogoCard = ({ src, alt }) => {
 // list of your client logos
 const logos = [
   { src: "/img/clients/cocacola.png", alt: "Coca-Cola" },
-  { src: "/img/clients/reddit.png", alt: "FIFA" },
+  { src: "/img/clients/reddit.png", alt: "reddit" },
   { src: "/img/clients/fifa.png", alt: "FIFA" },
-  { src: "/img/clients/htc.png", alt: "Coca-Cola" },
-  { src: "/img/clients/al-meera.png", alt: "Coca-Cola" },
-  { src: "/img/clients/noon.svg", alt: "Coca-Cola" },
-  { src: "/img/clients/levista.jpg", alt: "Coca-Cola" },
+  { src: "/img/clients/htc.png", alt: "htc" },
+  { src: "/img/clients/al-meera.png", alt: "al-meera" },
+  { src: "/img/clients/noon.svg", alt: "noon" },
+  { src: "/img/clients/levista.jpg", alt: "levista" },
   { src: "/img/clients/Lonewolf.png.webp", alt: "FIFA" },
   
   
