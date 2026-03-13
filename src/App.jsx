@@ -1,7 +1,10 @@
 import About from "./components/About";
+import AboutMattr from "./components/AboutMattr";
 import Hero from "./components/Hero";
 import NavBar from "./components/Navbar";
 import Features from "./components/Features";
+import Services from "./components/Services";
+import Portfolio from "./components/Portfolio";
 import Story from "./components/Story";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -14,9 +17,11 @@ function App() {
       <Hero />
       <Clients />
       <About />
-       
+      <AboutMattr />
+      <Services />
+      <Portfolio />
       <Features />
-     
+
       {/* <Story />
       <Contact /> */}
       <Footer />

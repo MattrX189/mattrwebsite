@@ -111,8 +111,8 @@ const Features = () => (
           array of products converge into an interconnected overlay experience
           on your world.
         </p> */}
-        <h1 className="special-font font-zentry text-8xl text-center text-blue-75">Welcome to</h1>
-         <h1 className="special-font font-zentry text-9xl text-center text-blue-75">Mattr<b>V</b>erse</h1>
+        <h1 className="special-font font-zentry font-black text-8xl text-center text-blue-75">Welcome to</h1>
+         <h1 className="special-font font-zentry font-black text-9xl text-center text-blue-75">MattrVerse</h1>
        
       </div>
 
@@ -121,7 +121,7 @@ const Features = () => (
           src="videos/feature-1.mp4"
           title={
             <>
-              Stu<b>D</b>io
+              Studios
             </>
           }
           description="Crafting digital experiences with precision—web, design, AI, and automation that fuel real growth."
@@ -135,7 +135,7 @@ const Features = () => (
             src="videos/feature-2.mp4"
             title={
               <>
-                La<b>B</b>s
+                Labs
               </>
             }
             description="Building bold products that simplify life and inspire innovation."
@@ -148,7 +148,7 @@ const Features = () => (
             src="videos/feature-3.mp4"
             title={
               <>
-                M<b>e</b>Dia
+                Media
               </>
             }
             description="Creating content that educates, empowers, and sparks curiosity in tech."
@@ -161,7 +161,7 @@ const Features = () => (
             src="videos/feature-4.mp4"
             title={
               <>
-                B<b>u</b>ildrs H<b>u</b>b
+                Buildrs Hub
               </>
             }
             description="A community of visionaries collaborating to build what truly matters."
