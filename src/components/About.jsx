@@ -86,7 +86,7 @@ MATTR reflects our commitment to developing revolutionary tech products that cre
         <div className="mask-clip-path about-image relative">
           {/* Background Image */}
           <img
-            src="img/about.webp"
+            src="img/about.png"
             alt="Background"
             className="absolute left-0 top-0 size-full object-cover"
           />
