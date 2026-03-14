@@ -52,7 +52,7 @@ const Clients = () => {
     setupMarquee(topTrack, topTweenRef, 1);   // row 1: left to right
     setupMarquee(bottomTrack, bottomTweenRef, -1); // row 2: right to left
 
-    // pause / resume on hover
+    // pause / resume when section leaves viewport
     const pause = () => {
       topTweenRef.current?.pause();
       bottomTweenRef.current?.pause();
@@ -61,9 +61,6 @@ const Clients = () => {
       topTweenRef.current?.play();
       bottomTweenRef.current?.play();
     };
-
-    section.addEventListener("mouseenter", pause);
-    section.addEventListener("mouseleave", play);
 
     ScrollTrigger.create({
       trigger: section,
@@ -93,8 +90,6 @@ const Clients = () => {
     return () => {
       topTweenRef.current?.kill();
       bottomTweenRef.current?.kill();
-      section.removeEventListener("mouseenter", pause);
-      section.removeEventListener("mouseleave", play);
     };
   });
 
