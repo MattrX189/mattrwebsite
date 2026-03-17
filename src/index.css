@@ -163,6 +163,13 @@ body {
   background-clip: text;
 }
 
+.text-gradient-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 40%, #818cf8 70%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .text-gradient-violet {
   background: linear-gradient(135deg, #a78bfa 0%, #c084fc 50%, #818cf8 100%);
   -webkit-background-clip: text;

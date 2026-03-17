@@ -1,0 +1,79 @@
+{
+  "hash": "a3084bfd",
+  "configHash": "481c328e",
+  "lockfileHash": "0b218e53",
+  "browserHash": "b14345b7",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "fa6db5da",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "8d8bbb2c",
+      "needsInterop": true
+    },
+    "gsap": {
+      "src": "../../node_modules/gsap/index.js",
+      "file": "gsap.js",
+      "fileHash": "eb52d8e6",
+      "needsInterop": false
+    },
+    "@gsap/react": {
+      "src": "../../node_modules/@gsap/react/src/index.js",
+      "file": "@gsap_react.js",
+      "fileHash": "fd186fb0",
+      "needsInterop": false
+    },
+    "gsap/all": {
+      "src": "../../node_modules/gsap/all.js",
+      "file": "gsap_all.js",
+      "fileHash": "7983bc64",
+      "needsInterop": false
+    },
+    "react-icons/ti": {
+      "src": "../../node_modules/react-icons/ti/index.mjs",
+      "file": "react-icons_ti.js",
+      "fileHash": "a7ef1013",
+      "needsInterop": false
+    },
+    "clsx": {
+      "src": "../../node_modules/clsx/dist/clsx.mjs",
+      "file": "clsx.js",
+      "fileHash": "4462da14",
+      "needsInterop": false
+    },
+    "react-use": {
+      "src": "../../node_modules/react-use/esm/index.js",
+      "file": "react-use.js",
+      "fileHash": "114f8df0",
+      "needsInterop": false
+    },
+    "gsap/ScrollTrigger": {
+      "src": "../../node_modules/gsap/ScrollTrigger.js",
+      "file": "gsap_ScrollTrigger.js",
+      "fileHash": "babca11d",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-TQLGTJHU": {
+      "file": "chunk-TQLGTJHU.js"
+    },
+    "chunk-IATCBWFF": {
+      "file": "chunk-IATCBWFF.js"
+    },
+    "chunk-E3Y24VKH": {
+      "file": "chunk-E3Y24VKH.js"
+    },
+    "chunk-65KY755N": {
+      "file": "chunk-65KY755N.js"
+    },
+    "chunk-V4OQ3NZ2": {
+      "file": "chunk-V4OQ3NZ2.js"
+    }
+  }
+}

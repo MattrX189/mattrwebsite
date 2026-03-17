@@ -132,7 +132,7 @@ const Footer = () => {
 
                 {/* quick contact info */}
                 <div className="cta-el mt-8 space-y-3">
-                  <a href="mailto:hello@mattr.co" className="flex items-center gap-3 text-sm text-slate-400 transition-colors duration-200 hover:text-white font-circular-web">
+                  <a href="mailto:hello@mattr.co" className="flex items-center gap-3 text-sm text-violet-400 transition-colors duration-200 hover:text-white font-circular-web">
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-3.5 w-3.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
@@ -140,14 +140,14 @@ const Footer = () => {
                     </div>
                     hello@mattr.co.in
                   </a>
-                  <div className="flex items-center gap-3 text-sm text-slate-400 font-circular-web">
+                  <div className="flex items-center gap-3 text-sm text-violet-400 font-circular-web">
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-3.5 w-3.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                       </svg>
                     </div>
-                  India
+                    India
                   </div>
                 </div>
               </div>
@@ -220,7 +220,7 @@ const Footer = () => {
 
             {/* brand column */}
             <div className="ft-bottom md:col-span-4">
-              <img src="/img/logo.png" alt="Mattr" className="mb-5 h-12 w-auto brightness-0 invert" />
+              <img src="/img/logo.png" alt="Mattr" className="mb-5 h-24 w-auto" />
               <p className="mb-6 max-w-xs text-sm leading-relaxed text-slate-500 font-circular-web">
                 We build digital products that don't just work — they transform. From strategy to shipping, we're your end-to-end technology partner.
               </p>
@@ -291,7 +291,7 @@ const Footer = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mt-0.5 h-4 w-4 shrink-0 text-violet-400">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                   </svg>
-                  <a href="mailto:hello@mattr.co" className="text-sm text-slate-500 transition-colors duration-200 hover:text-white font-circular-web">
+                  <a href="mailto:hello@mattr.co" className="text-sm text-violet-400 transition-colors duration-200 hover:text-white font-circular-web">
                     hello@mattr.co.in
                   </a>
                 </li>
@@ -300,7 +300,7 @@ const Footer = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                   </svg>
-                  <span className="text-sm text-slate-500 font-circular-web">
+                  <span className="text-sm text-violet-400 font-circular-web">
                     India
                   </span>
                 </li>
