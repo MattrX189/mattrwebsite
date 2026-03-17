@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   width: 100dvw;
   overflow-x: hidden;
@@ -15,6 +19,12 @@ body {
 
 *, *::before, *::after {
   cursor: none !important;
+}
+
+/* ── Selection style ── */
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: #fff;
 }
 
 @layer base {
@@ -37,8 +47,6 @@ body {
     font-family: "robert-regular";
     src: url("/fonts/robert-regular.woff2") format("woff2");
   }
-
-  /* Poppins loaded via Google Fonts import above */
 }
 
 @layer utilities {
@@ -47,11 +55,11 @@ body {
   }
 
   .nav-hover-btn {
-    @apply relative ms-10 font-general text-xs uppercase text-blue-50 after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-neutral-800 after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white cursor-pointer;
+    @apply relative ms-10 font-general text-xs uppercase text-blue-50 after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-[#CAFF29] after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100 cursor-pointer transition-colors duration-300 hover:text-[#CAFF29];
   }
 
   .floating-nav {
-    @apply bg-black rounded-lg border;
+    @apply bg-black/80 backdrop-blur-xl rounded-full border border-white/[0.06];
   }
 
   .absolute-center {
@@ -147,6 +155,122 @@ body {
   }
 }
 
+/* ── Gradient text utility ── */
+.text-gradient {
+  background: linear-gradient(135deg, #CAFF29 0%, #a3e635 50%, #CAFF29 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-violet {
+  background: linear-gradient(135deg, #a78bfa 0%, #c084fc 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glow effects ── */
+.glow-violet {
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.15), 0 0 80px rgba(139, 92, 246, 0.05);
+}
+
+.glow-lime {
+  box-shadow: 0 0 40px rgba(202, 255, 41, 0.15), 0 0 80px rgba(202, 255, 41, 0.05);
+}
+
+/* ── Magnetic button hover ── */
+.magnetic-btn {
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.magnetic-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3), 0 0 80px rgba(139, 92, 246, 0.1);
+}
+
+/* ── Line reveal animation ── */
+.line-reveal {
+  overflow: hidden;
+}
+
+.line-reveal > * {
+  transform: translateY(110%);
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.line-reveal.revealed > * {
+  transform: translateY(0);
+}
+
+/* ── Noise texture overlay ── */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Horizontal scroll line ── */
+.scroll-line {
+  background: linear-gradient(90deg, transparent, rgba(202, 255, 41, 0.3), transparent);
+  animation: scroll-line-move 3s ease-in-out infinite;
+}
+
+@keyframes scroll-line-move {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+/* ── Pulse ring animation ── */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid currentColor;
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* ── Float animation ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(5px) rotate(-1deg); }
+}
+
+.float-anim {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ── Shimmer effect ── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #4338ca 0%, #6366f1 15%, #7c3aed 30%, #4f46e5 50%, #6d28d9 65%, #4338ca 80%, #6366f1 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── Section divider ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 20%, rgba(139, 92, 246, 0.2) 50%, rgba(255, 255, 255, 0.06) 80%, transparent 100%);
+}
+
 .indicator-line {
   @apply h-1 w-px rounded-full bg-white transition-all duration-200 ease-in-out;
 }
@@ -172,7 +296,6 @@ body {
 }
 
 /* From Uiverse.io by G4b413l */
-/* https://uiverse.io/G4b413l/tidy-walrus-92 */
 .three-body {
   --uib-size: 35px;
   --uib-speed: 0.8s;
@@ -241,37 +364,37 @@ body {
 }
 
 @keyframes spin78236 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @keyframes wobble1 {
-  0%,
-  100% {
-    transform: translateY(0%) scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateY(-66%) scale(0.65);
-    opacity: 0.8;
-  }
+  0%, 100% { transform: translateY(0%) scale(1); opacity: 1; }
+  50% { transform: translateY(-66%) scale(0.65); opacity: 0.8; }
 }
 
 @keyframes wobble2 {
-  0%,
-  100% {
-    transform: translateY(0%) scale(1);
-    opacity: 1;
-  }
+  0%, 100% { transform: translateY(0%) scale(1); opacity: 1; }
+  50% { transform: translateY(66%) scale(0.65); opacity: 0.8; }
+}
 
-  50% {
-    transform: translateY(66%) scale(0.65);
-    opacity: 0.8;
-  }
+/* ── Staggered fade-in for children ── */
+.stagger-fade > * {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* ── Smooth card hover lift ── */
+.card-hover {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Marquee pause on hover ── */
+.marquee-track:hover {
+  animation-play-state: paused;
 }

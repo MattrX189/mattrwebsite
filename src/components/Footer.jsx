@@ -91,17 +91,17 @@ const Footer = () => {
     <footer ref={footerRef} className="relative bg-black text-white overflow-hidden">
 
       {/* ═══════════ CTA + FORM SECTION ═══════════ */}
-      <div className="relative px-6 pt-28 pb-20 md:pt-40 md:pb-28">
+      <div className="relative px-6 pt-4 pb-20 md:pt-6 md:pb-28">
         {/* background orbs */}
         <div className="cta-orb-1 pointer-events-none absolute -top-20 left-1/4 h-[400px] w-[400px] rounded-full bg-violet-600/[0.06] blur-[120px]" />
         <div className="cta-orb-2 pointer-events-none absolute bottom-0 right-1/4 h-[350px] w-[350px] rounded-full bg-[#CAFF29]/[0.04] blur-[100px]" />
 
         {/* single unified card */}
-        <div className="cta-card relative mx-auto max-w-6xl rounded-[2rem] border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-1 backdrop-blur-sm">
-          <div className="relative overflow-hidden rounded-[1.75rem] bg-[#0A0A0F]/80">
+        <div className="cta-card relative mx-auto max-w-6xl rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm">
+          <div className="relative overflow-hidden rounded-2xl bg-[#111116]">
 
             {/* decorative top gradient line */}
-            <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-px w-3/4 bg-gradient-to-r from-transparent via-violet-500/40 to-transparent" />
+            <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-px w-3/4 bg-gradient-to-r from-transparent via-violet-400/40 to-transparent" />
 
             {/* corner accents */}
             <div className="pointer-events-none absolute top-5 left-5 h-10 w-10 border-l-2 border-t-2 border-white/[0.06] rounded-tl-lg" />
@@ -122,7 +122,7 @@ const Footer = () => {
                 {/* heading */}
                 <h2 className="cta-el font-zentry font-black text-4xl uppercase leading-[1.05] text-white md:text-5xl lg:text-6xl">
                   Let's Build<br />Something<br />
-                  <span className="text-violet-400">Together.</span>
+                  <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent">Together.</span>
                 </h2>
 
                 {/* description */}
@@ -153,7 +153,7 @@ const Footer = () => {
               </div>
 
               {/* RIGHT — form */}
-              <div className="cta-form border-t border-white/[0.06] p-10 md:border-l md:border-t-0 md:p-14 lg:p-16">
+              <div className="cta-form border-t border-white/[0.08] bg-white/[0.02] p-10 md:border-l md:border-t-0 md:p-14 lg:p-16 backdrop-blur-sm">
                 <h3 className="mb-6 font-zentry text-lg font-black uppercase text-white md:text-xl">
                   Send us a message
                 </h3>
@@ -162,22 +162,22 @@ const Footer = () => {
                     <input
                       type="text"
                       placeholder="First Name"
-                      className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-violet-500/50 focus:bg-white/[0.05] font-circular-web"
+                      className="w-full rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web"
                     />
                     <input
                       type="email"
                       placeholder="Email"
                       required
-                      className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-violet-500/50 focus:bg-white/[0.05] font-circular-web"
+                      className="w-full rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web"
                     />
                   </div>
                   <input
                     type="text"
                     placeholder="Company Name"
-                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-violet-500/50 focus:bg-white/[0.05] font-circular-web"
+                    className="w-full rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web"
                   />
                   <select
-                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-slate-500 outline-none transition-all duration-300 focus:border-violet-500/50 focus:bg-white/[0.05] font-circular-web appearance-none"
+                    className="w-full rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web appearance-none"
                     defaultValue=""
                   >
                     <option value="" disabled>What are you looking for?</option>
@@ -190,11 +190,11 @@ const Footer = () => {
                   <textarea
                     rows="3"
                     placeholder="Tell us about your project..."
-                    className="w-full resize-none rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-violet-500/50 focus:bg-white/[0.05] font-circular-web"
+                    className="w-full resize-none rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web"
                   ></textarea>
                   <button
                     type="submit"
-                    className="group mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-violet-500 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]"
+                    className="group mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]"
                   >
                     Submit Enquiry
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1">

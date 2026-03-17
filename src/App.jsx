@@ -47,13 +47,13 @@ function App() {
     };
 
     const onMouseEnterLink = () => {
-      gsap.to(dot, { scale: 1.5, duration: 0.2 });
-      gsap.to(ring, { scale: 1.8, opacity: 0.3, duration: 0.2 });
+      gsap.to(dot, { scale: 2, duration: 0.3, ease: "back.out(1.7)" });
+      gsap.to(ring, { scale: 1.8, opacity: 0, duration: 0.3 });
     };
 
     const onMouseLeaveLink = () => {
-      gsap.to(dot, { scale: 1, duration: 0.2 });
-      gsap.to(ring, { scale: 1, opacity: 1, duration: 0.2 });
+      gsap.to(dot, { scale: 1, duration: 0.3 });
+      gsap.to(ring, { scale: 1, opacity: 1, duration: 0.3 });
     };
 
     window.addEventListener("mousemove", onMouseMove);
@@ -87,19 +87,21 @@ function App() {
         ref={cursorDotRef}
         className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
-          width: 10,
-          height: 10,
-          background: "radial-gradient(circle, #a855f7, #6366f1)",
-          boxShadow: "0 0 12px rgba(168, 85, 247, 0.6)",
+          width: 8,
+          height: 8,
+          background: "#CAFF29",
+          boxShadow: "0 0 16px rgba(202, 255, 41, 0.5), 0 0 40px rgba(202, 255, 41, 0.2)",
+          transition: "width 0.3s, height 0.3s",
         }}
       />
       {/* Custom cursor — ring */}
       <div
         ref={cursorRingRef}
-        className="pointer-events-none fixed top-0 left-0 z-[9998] -translate-x-1/2 -translate-y-1/2 rounded-full border border-purple-400/50"
+        className="pointer-events-none fixed top-0 left-0 z-[9998] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#CAFF29]/30"
         style={{
-          width: 36,
-          height: 36,
+          width: 40,
+          height: 40,
+          transition: "border-color 0.3s",
         }}
       />
       <NavBar />
@@ -110,9 +112,6 @@ function App() {
       <Services />
       <Portfolio />
       <Features />
-
-      {/* <Story />
-      <Contact /> */}
       <Footer />
     </main>
   );

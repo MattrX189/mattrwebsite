@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-import AnimatedTitle from "./AnimatedTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,7 +18,6 @@ const Clients = () => {
     const bottomTrack = bottomTrackRef.current;
     if (!section || !topTrack || !bottomTrack) return;
 
-    // kill old tweens
     [topTweenRef, bottomTweenRef].forEach((ref) => {
       if (ref.current) {
         ref.current.kill();
@@ -33,8 +31,6 @@ const Clients = () => {
       const w = row.offsetWidth;
       const speed = w / 60;
 
-      // For left-moving (direction=-1): start at 0, go to -w
-      // For right-moving (direction=1): start at -w, go to 0
       if (direction === 1) {
         gsap.set(track, { x: -w });
       } else {
@@ -49,10 +45,9 @@ const Clients = () => {
       });
     };
 
-    setupMarquee(topTrack, topTweenRef, 1);   // row 1: left to right
-    setupMarquee(bottomTrack, bottomTweenRef, -1); // row 2: right to left
+    setupMarquee(topTrack, topTweenRef, 1);
+    setupMarquee(bottomTrack, bottomTweenRef, -1);
 
-    // pause / resume when section leaves viewport
     const pause = () => {
       topTweenRef.current?.pause();
       bottomTweenRef.current?.pause();
@@ -71,13 +66,25 @@ const Clients = () => {
       onLeaveBack: pause,
     });
 
-    // fade-in on scroll
+    // Heading entrance
+    gsap.fromTo(
+      ".cl-heading",
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".cl-heading-block", start: "top 82%" },
+      }
+    );
+
     gsap.fromTo(
       section,
-      { opacity: 0, y: 60 },
+      { opacity: 0 },
       {
         opacity: 1,
-        y: 0,
         duration: 1,
         ease: "power3.out",
         scrollTrigger: {
@@ -93,29 +100,44 @@ const Clients = () => {
     };
   });
 
-  // 10 logos per row, no duplicates
   const topLogos = logos.slice(0, 10);
   const bottomLogos = logos.slice(10, 20);
 
   return (
-    <section id="clients" ref={sectionRef} className="py-28 bg-transparent">
-      <div className="mx-auto px-0">
-        <div className="container mx-auto px-6">
-          <AnimatedTitle
-            title={`Trusted by <b>brands</b> that <br/> build with us`}
-            containerClass="text-center mb-6 !text-white"
-          />
+    <section id="clients" ref={sectionRef} className="py-28 bg-transparent relative">
+      {/* Section divider */}
+      <div className="section-divider absolute top-0 w-full" />
 
-          <p className="text-center text-sm md:text-base text-slate-400 mb-14 max-w-2xl mx-auto leading-relaxed">
+      <div className="mx-auto px-0">
+        <div className="cl-heading-block container mx-auto px-6 mb-14">
+          {/* Tag line */}
+          <div className="cl-heading flex items-center justify-center gap-3 mb-6">
+            <div className="h-[1px] w-8 bg-gradient-to-r from-transparent to-violet-400/40" />
+            <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-violet-400/70 font-general">
+              Trusted Partners
+            </span>
+            <div className="h-[1px] w-8 bg-gradient-to-l from-transparent to-violet-400/40" />
+          </div>
+
+          {/* Heading — elegant mixed case */}
+          <h2 className="cl-heading text-center font-circular-web text-3xl font-medium leading-[1.2] text-white sm:text-4xl md:text-5xl">
+            Trusted by brands that{" "}
+            <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent">
+              build with us
+            </span>
+          </h2>
+
+          {/* Subtitle */}
+          <p className="cl-heading text-center text-sm md:text-base text-slate-400 mt-5 max-w-lg mx-auto leading-relaxed font-circular-web">
             We partner with bold teams and ambitious brands — delivering
             pixel-perfect products and measurable outcomes.
           </p>
         </div>
 
-        {/* Row 1 — scrolls left */}
+        {/* Row 1 */}
         <div className="overflow-hidden relative mb-4">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-black to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-black to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-black to-transparent" />
 
           <div
             ref={topTrackRef}
@@ -132,10 +154,10 @@ const Clients = () => {
           </div>
         </div>
 
-        {/* Row 2 — scrolls right */}
+        {/* Row 2 */}
         <div className="overflow-hidden relative">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-black to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-black to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-black to-transparent" />
 
           <div
             ref={bottomTrackRef}
@@ -157,17 +179,16 @@ const Clients = () => {
 };
 
 const LogoCard = ({ src, alt }) => (
-  <div className="group relative flex items-center justify-center w-36 h-20 md:w-44 md:h-24 flex-shrink-0 rounded-xl bg-white/[0.03] border border-white/[0.06] backdrop-blur-sm transition-all duration-300 hover:bg-white/[0.08] hover:border-white/[0.12]">
+  <div className="group relative flex items-center justify-center w-36 h-20 md:w-44 md:h-24 flex-shrink-0 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all duration-500 hover:bg-white/[0.06] hover:border-violet-500/15">
     <img
       src={src}
       alt={alt}
-      className="max-h-[70%] max-w-[80%] object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105"
+      className="max-h-[70%] max-w-[80%] object-contain opacity-35 grayscale transition-all duration-500 group-hover:opacity-90 group-hover:grayscale-0 group-hover:scale-105"
     />
   </div>
 );
 
 const logos = [
-  // Row 1 (indices 0-9)
   { src: "/img/clients/cocacola.png", alt: "Coca-Cola" },
   { src: "/img/clients/reddit.png", alt: "Reddit" },
   { src: "/img/clients/fifa.png", alt: "FIFA" },
@@ -178,7 +199,6 @@ const logos = [
   { src: "/img/clients/hul.png", alt: "HUL" },
   { src: "/img/clients/levista.png", alt: "Levista" },
   { src: "/img/clients/lonewolf.png", alt: "Lonewolf" },
-  // Row 2 (indices 10-19)
   { src: "/img/clients/liuvinci.png", alt: "Liu Vinci" },
   { src: "/img/clients/newsahoot.png", alt: "Newsahoot" },
   { src: "/img/clients/flexifyme.svg", alt: "FlexifyMe" },

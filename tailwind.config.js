@@ -10,6 +10,21 @@ export default {
         "robert-medium": ["robert-medium", "sans-serif"],
         "robert-regular": ["robert-regular", "sans-serif"],
       },
+      animation: {
+        "float-slow": "float-slow 6s ease-in-out infinite",
+        "float-slow-reverse": "float-slow-reverse 7s ease-in-out infinite",
+        "spin-slow": "spin 12s linear infinite",
+      },
+      keyframes: {
+        "float-slow": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-12px)" },
+        },
+        "float-slow-reverse": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(10px)" },
+        },
+      },
       colors: {
         blue: {
           50: "#DFDFF0",
