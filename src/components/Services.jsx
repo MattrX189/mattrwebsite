@@ -21,6 +21,32 @@ const services = [
   },
   {
     num: "02",
+    tag: "Design",
+    title: "UI/UX Design",
+    desc: "User-centered interfaces that feel intuitive and look stunning — where every interaction is designed with purpose.",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />
+      </svg>
+    ),
+    gradient: "from-violet-400/20 via-violet-400/5 to-transparent",
+    accentColor: "#a78bfa",
+  },
+  {
+    num: "03",
+    tag: "Branding",
+    title: "Logo & Branding",
+    desc: "Distinctive brand identities that leave a lasting impression — from logos to complete visual systems that define who you are.",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+      </svg>
+    ),
+    gradient: "from-pink-400/20 via-pink-400/5 to-transparent",
+    accentColor: "#f472b6",
+  },
+  {
+    num: "04",
     tag: "AI",
     title: "AI Automation",
     desc: "Smart workflows and intelligent systems that automate the mundane — so your team can focus on what matters.",
@@ -33,7 +59,7 @@ const services = [
     accentColor: "#22d3ee",
   },
   {
-    num: "03",
+    num: "05",
     tag: "Marketing",
     title: "Banners & Social Media Graphics",
     desc: "Scroll-stopping visuals for every platform — from ad banners to social posts that drive engagement and clicks.",
@@ -46,7 +72,7 @@ const services = [
     accentColor: "#fbbf24",
   },
   {
-    num: "04",
+    num: "06",
     tag: "Packaging",
     title: "Packaging Design",
     desc: "Shelf-ready packaging that tells your brand story at first glance — bold, functional, and impossible to ignore.",
@@ -59,20 +85,7 @@ const services = [
     accentColor: "#f97316",
   },
   {
-    num: "05",
-    tag: "Motion",
-    title: "3D Animation & VFX",
-    desc: "Immersive 3D worlds and visual effects that push creative boundaries — from product renders to full cinematic sequences.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
-      </svg>
-    ),
-    gradient: "from-emerald-500/20 via-emerald-500/5 to-transparent",
-    accentColor: "#10b981",
-  },
-  {
-    num: "06",
+    num: "07",
     tag: "Video",
     title: "Video Editing",
     desc: "Cinematic cuts, seamless transitions, and compelling narratives — video content that captivates from frame one.",
@@ -84,9 +97,22 @@ const services = [
     gradient: "from-red-500/20 via-red-500/5 to-transparent",
     accentColor: "#ef4444",
   },
+  {
+    num: "08",
+    tag: "Motion",
+    title: "3D Animation & VFX",
+    desc: "Immersive 3D worlds and visual effects that push creative boundaries — from product renders to full cinematic sequences.",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
+      </svg>
+    ),
+    gradient: "from-emerald-500/20 via-emerald-500/5 to-transparent",
+    accentColor: "#10b981",
+  },
 ];
 
-/* Card spans: alternating 7/5 and 5/7 columns for 6 cards */
+/* Card spans: alternating 7/5 and 5/7 columns for 8 cards */
 const cardSpans = [
   "md:col-span-7",
   "md:col-span-5",
@@ -94,6 +120,8 @@ const cardSpans = [
   "md:col-span-7",
   "md:col-span-7",
   "md:col-span-5",
+  "md:col-span-5",
+  "md:col-span-7",
 ];
 
 const ServiceCard = ({ svc, span, index }) => {

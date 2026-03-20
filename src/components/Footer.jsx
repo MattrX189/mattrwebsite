@@ -181,10 +181,14 @@ const Footer = () => {
                     defaultValue=""
                   >
                     <option value="" disabled>What are you looking for?</option>
+                    <option value="development">Website Development</option>
                     <option value="design">UI/UX Design</option>
-                    <option value="development">Web / App Development</option>
-                    <option value="strategy">Digital Strategy</option>
-                    <option value="branding">Brand Identity</option>
+                    <option value="branding">Logo & Branding</option>
+                    <option value="ai">AI Automation</option>
+                    <option value="graphics">Banners & Social Media Graphics</option>
+                    <option value="packaging">Packaging Design</option>
+                    <option value="video">Video Editing</option>
+                    <option value="3d">3D Animation & VFX</option>
                     <option value="other">Other</option>
                   </select>
                   <textarea
@@ -241,6 +245,15 @@ const Footer = () => {
                   </a>
                 ))}
               </div>
+
+              {/* DPIIT badge */}
+              <div className="mt-5 inline-flex items-center gap-3 rounded-lg border border-violet-500/15 bg-violet-500/[0.06] px-4 py-2">
+                <img src="/img/startup-india.png" alt="Startup India" className="h-12 w-auto rounded-md bg-white p-1" />
+                <div>
+                  <span className="block text-[9px] font-bold uppercase tracking-[0.15em] text-violet-400 font-general">DPIIT Recognised</span>
+                  <span className="block text-[10px] text-slate-500 font-circular-web">Startup India Registered</span>
+                </div>
+              </div>
             </div>
 
             {/* nav: Company */}
@@ -266,11 +279,14 @@ const Footer = () => {
               </h4>
               <ul className="space-y-3">
                 {[
+                  "Website Development",
                   "UI/UX Design",
-                  "Web Development",
-                  "Mobile Apps",
-                  "Digital Strategy",
-                  "Brand Identity",
+                  "Logo & Branding",
+                  "AI Automation",
+                  "Banners & Graphics",
+                  "Packaging Design",
+                  "Video Editing",
+                  "3D Animation & VFX",
                 ].map((item) => (
                   <li key={item}>
                     <a href="#services" className="text-sm text-slate-500 transition-colors duration-200 hover:text-white font-circular-web">

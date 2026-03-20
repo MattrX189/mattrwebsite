@@ -232,6 +232,15 @@ const AboutMattr = () => {
             digital products across <span className="text-white/80">6+ countries</span> that
             don't just perform — they redefine what's possible.
           </p>
+
+          {/* DPIIT badge */}
+          <div className="am-intro mt-6 inline-flex items-center gap-4 rounded-xl border border-violet-500/15 bg-violet-500/[0.06] px-5 py-3">
+            <img src="/img/startup-india.png" alt="Startup India" className="h-16 w-auto rounded-lg bg-white p-1.5" />
+            <div>
+              <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-violet-400 font-general">DPIIT Recognised</span>
+              <span className="block text-xs text-slate-400 font-circular-web">Startup India Registered Firm</span>
+            </div>
+          </div>
         </div>
 
         {/* ═══════════ STATS ROW ═══════════ */}
