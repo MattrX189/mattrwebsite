@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "vite-dev",
-      "runtimeExecutable": "/bin/sleep",
-      "runtimeArgs": ["86400"],
-      "port": 5177
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "process.chdir('/tmp/mattrdev');import('/tmp/mattrdev/node_modules/vite/bin/vite.js')", "--", "--port", "5173"],
+      "port": 5173,
+      "url": "http://localhost:5173"
     }
   ]
 }

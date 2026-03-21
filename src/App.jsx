@@ -7,6 +7,7 @@ import NavBar from "./components/Navbar";
 import Features from "./components/Features";
 import Services from "./components/Services";
 import Portfolio from "./components/Portfolio";
+import MattrVerse from "./components/MattrVerse";
 import Story from "./components/Story";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -111,7 +112,8 @@ function App() {
       <AboutMattr />
       <Services />
       <Portfolio />
-      <Features />
+      <MattrVerse />
+      {/* <Features /> */}
       <Footer />
     </main>
   );

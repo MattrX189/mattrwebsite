@@ -88,7 +88,7 @@ const Footer = () => {
   };
 
   return (
-    <footer ref={footerRef} className="relative bg-black text-white overflow-hidden">
+    <footer ref={footerRef} className="relative bg-black text-white overflow-hidden" style={{ zIndex: 65 }}>
 
       {/* ═══════════ CTA + FORM SECTION ═══════════ */}
       <div className="relative px-6 pt-4 pb-20 md:pt-6 md:pb-28">
@@ -217,37 +217,48 @@ const Footer = () => {
 
       {/* ═══════════ FULL FOOTER ═══════════ */}
       <div className="ft-bottom-wrap border-t border-white/[0.06]">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-10 md:px-12 md:py-20">
 
           {/* ── top row: logo + nav columns ── */}
-          <div className="grid gap-12 md:grid-cols-12">
+          <div className="grid gap-8 md:gap-12 md:grid-cols-12">
 
             {/* brand column */}
             <div className="ft-bottom md:col-span-4">
-              <img src="/img/logo.png" alt="Mattr" className="mb-5 h-24 w-auto" />
-              <p className="mb-6 max-w-xs text-sm leading-relaxed text-slate-500 font-circular-web">
+              <img src="/img/logo.png" alt="Mattr" className="mb-4 h-16 w-auto md:mb-5 md:h-24" />
+              <p className="mb-4 max-w-xs text-sm leading-relaxed text-slate-500 font-circular-web md:mb-6">
                 We build digital products that don't just work — they transform. From strategy to shipping, we're your end-to-end technology partner.
               </p>
-              {/* socials */}
-              <div className="flex items-center gap-3">
-                {[
-                  { href: "https://www.instagram.com/mattr_official/", icon: "/img/insta.svg", label: "Instagram" },
-                  { href: "#", icon: "/img/youtube.svg", label: "YouTube" },
-                  { href: "#", icon: "/img/x.svg", label: "X" },
-                ].map((s, i) => (
-                  <a
-                    key={i}
-                    href={s.href}
-                    aria-label={s.label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] transition-all duration-300 hover:border-violet-500/30 hover:bg-violet-500/10"
-                  >
-                    <img src={s.icon} alt={s.label} className="h-3.5 w-3.5 brightness-0 invert opacity-50" />
-                  </a>
-                ))}
+              {/* socials + DPIIT row on mobile */}
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
+                  {[
+                    { href: "https://www.instagram.com/mattr_official/", icon: "/img/insta.svg", label: "Instagram" },
+                    { href: "#", icon: "/img/youtube.svg", label: "YouTube" },
+                    { href: "#", icon: "/img/x.svg", label: "X" },
+                  ].map((s, i) => (
+                    <a
+                      key={i}
+                      href={s.href}
+                      aria-label={s.label}
+                      className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] transition-all duration-300 hover:border-violet-500/30 hover:bg-violet-500/10"
+                    >
+                      <img src={s.icon} alt={s.label} className="h-3.5 w-3.5 brightness-0 invert opacity-50" />
+                    </a>
+                  ))}
+                </div>
+
+                {/* DPIIT badge */}
+                <div className="inline-flex items-center gap-2 rounded-lg border border-violet-500/15 bg-violet-500/[0.06] px-3 py-1.5 md:hidden">
+                  <img src="/img/startup-india.png" alt="Startup India" className="h-8 w-auto rounded-md bg-white p-0.5" />
+                  <div>
+                    <span className="block text-[8px] font-bold uppercase tracking-[0.15em] text-violet-400 font-general">DPIIT Recognised</span>
+                    <span className="block text-[9px] text-slate-500 font-circular-web">Startup India</span>
+                  </div>
+                </div>
               </div>
 
-              {/* DPIIT badge */}
-              <div className="mt-5 inline-flex items-center gap-3 rounded-lg border border-violet-500/15 bg-violet-500/[0.06] px-4 py-2">
+              {/* DPIIT badge — desktop only */}
+              <div className="mt-5 hidden md:inline-flex items-center gap-3 rounded-lg border border-violet-500/15 bg-violet-500/[0.06] px-4 py-2">
                 <img src="/img/startup-india.png" alt="Startup India" className="h-12 w-auto rounded-md bg-white p-1" />
                 <div>
                   <span className="block text-[9px] font-bold uppercase tracking-[0.15em] text-violet-400 font-general">DPIIT Recognised</span>
@@ -256,88 +267,83 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* nav: Company */}
-            <div className="ft-bottom md:col-span-2">
-              <h4 className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-white font-general">
-                Company
-              </h4>
-              <ul className="space-y-3">
-                {["About", "Services", "Portfolio", "Careers", "Blog"].map((item) => (
-                  <li key={item}>
-                    <a href={`#${item.toLowerCase()}`} className="text-sm text-slate-500 transition-colors duration-200 hover:text-white font-circular-web">
-                      {item}
+            {/* nav columns — 2-col grid on mobile */}
+            <div className="grid grid-cols-2 gap-6 md:contents">
+              {/* nav: Company */}
+              <div className="ft-bottom md:col-span-2">
+                <h4 className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white font-general md:mb-4">
+                  Company
+                </h4>
+                <ul className="space-y-2 md:space-y-3">
+                  {["About", "Services", "Portfolio", "Careers", "Blog"].map((item) => (
+                    <li key={item}>
+                      <a href={`#${item.toLowerCase()}`} className="text-xs text-slate-500 transition-colors duration-200 hover:text-white font-circular-web md:text-sm">
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* nav: Services */}
+              <div className="ft-bottom md:col-span-3">
+                <h4 className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white font-general md:mb-4">
+                  Services
+                </h4>
+                <ul className="space-y-2 md:space-y-3">
+                  {[
+                    "Website Development",
+                    "UI/UX Design",
+                    "Logo & Branding",
+                    "AI Automation",
+                    "Banners & Graphics",
+                    "Packaging Design",
+                    "Video Editing",
+                    "3D Animation & VFX",
+                  ].map((item) => (
+                    <li key={item}>
+                      <a href="#services" className="text-xs text-slate-500 transition-colors duration-200 hover:text-white font-circular-web md:text-sm">
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* nav: Get in Touch */}
+              <div className="ft-bottom col-span-2 md:col-span-3">
+                <h4 className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white font-general md:mb-4">
+                  Get in Touch
+                </h4>
+                <ul className="flex flex-row gap-4 md:flex-col md:space-y-3 md:gap-0">
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mt-0.5 h-4 w-4 shrink-0 text-violet-400">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>
+                    <a href="mailto:hello@mattr.co" className="text-xs text-violet-400 transition-colors duration-200 hover:text-white font-circular-web md:text-sm">
+                      hello@mattr.co.in
                     </a>
                   </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* nav: Services */}
-            <div className="ft-bottom md:col-span-3">
-              <h4 className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-white font-general">
-                Services
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  "Website Development",
-                  "UI/UX Design",
-                  "Logo & Branding",
-                  "AI Automation",
-                  "Banners & Graphics",
-                  "Packaging Design",
-                  "Video Editing",
-                  "3D Animation & VFX",
-                ].map((item) => (
-                  <li key={item}>
-                    <a href="#services" className="text-sm text-slate-500 transition-colors duration-200 hover:text-white font-circular-web">
-                      {item}
-                    </a>
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mt-0.5 h-4 w-4 shrink-0 text-violet-400">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+                    <span className="text-xs text-violet-400 font-circular-web md:text-sm">
+                      India
+                    </span>
                   </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* nav: Get in Touch */}
-            <div className="ft-bottom md:col-span-3">
-              <h4 className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-white font-general">
-                Get in Touch
-              </h4>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mt-0.5 h-4 w-4 shrink-0 text-violet-400">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                  </svg>
-                  <a href="mailto:hello@mattr.co" className="text-sm text-violet-400 transition-colors duration-200 hover:text-white font-circular-web">
-                    hello@mattr.co.in
-                  </a>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mt-0.5 h-4 w-4 shrink-0 text-violet-400">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                  </svg>
-                  <span className="text-sm text-violet-400 font-circular-web">
-                    India
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  
-                  
-                </li>
-              </ul>
+                </ul>
+              </div>
             </div>
           </div>
 
           {/* ── divider ── */}
-          <div className="mt-14 mb-8 h-px w-full bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+          <div className="mt-8 mb-6 h-px w-full bg-gradient-to-r from-transparent via-white/[0.06] to-transparent md:mt-14 md:mb-8" />
 
           {/* ── bottom bar ── */}
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="ft-bottom text-xs text-slate-600 font-general">
-              © {new Date().getFullYear()} Mattr™. All rights reserved.
-            </p>
-
-            <div className="ft-bottom flex items-center gap-6 text-xs text-slate-600 font-general">
+          <div className="flex flex-col items-center justify-between gap-3 md:flex-row md:gap-4">
+            <div className="ft-bottom flex flex-wrap items-center justify-center gap-4 text-xs text-slate-600 font-general md:order-2">
               <a href="/terms" className="transition-colors duration-200 hover:text-white">
                 Terms & Conditions
               </a>
@@ -350,6 +356,10 @@ const Footer = () => {
                 Cookie Policy
               </a>
             </div>
+
+            <p className="ft-bottom text-xs text-slate-600 font-general md:order-1">
+              © {new Date().getFullYear()} Mattr™. All rights reserved.
+            </p>
           </div>
         </div>
       </div>

@@ -356,34 +356,65 @@ const Features = () => {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      // Heading entrance
-      gsap.fromTo(
-        ".feat-heading",
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".feat-heading-block", start: "top 80%" },
-        }
-      );
+      const introWrap = section.querySelector(".feat-intro-wrap");
+      const curtainL = section.querySelector(".feat-curtain-l");
+      const curtainR = section.querySelector(".feat-curtain-r");
+      const centerTitle = section.querySelector(".feat-center-title");
+      const headingBlock = section.querySelector(".feat-heading-block");
+      const bentoGrid = section.querySelector(".bento-grid");
 
-      // Bento cards entrance
-      gsap.fromTo(
-        ".bento-entrance",
-        { y: 60, opacity: 0, scale: 0.98 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".bento-grid", start: "top 80%" },
-        }
-      );
+      // Initial states — curtains start CLOSED so overlay is immediately visible
+      gsap.set(curtainL, { xPercent: 0 });
+      gsap.set(curtainR, { xPercent: 0 });
+      gsap.set(centerTitle, { opacity: 0, scale: 0.9 });
+      gsap.set(headingBlock, { opacity: 0 });
+      gsap.set(bentoGrid, { opacity: 0 });
+
+      const phaseScroll = 350;
+      const totalPhases = 4;
+
+      ScrollTrigger.create({
+        trigger: introWrap,
+        start: "top top",
+        end: `+=${phaseScroll * totalPhases}`,
+        pin: true,
+        scrub: 0.5,
+        onUpdate: (self) => {
+          const p = self.progress;
+
+          // Phase 1 (0→0.25): Title appears on closed curtains
+          const p1 = Math.min(p / 0.25, 1);
+          gsap.set(curtainL, { xPercent: 0 });
+          gsap.set(curtainR, { xPercent: 0 });
+          gsap.set(centerTitle, { opacity: p1, scale: 0.9 + p1 * 0.1 });
+
+          // Phase 2 (0.25→0.50): Curtains open + center title fades → real heading
+          const p2 = Math.max(0, Math.min((p - 0.25) / 0.25, 1));
+          if (p2 > 0) {
+            gsap.set(curtainL, { xPercent: -p2 * 100 });
+            gsap.set(curtainR, { xPercent: p2 * 100 });
+            gsap.set(centerTitle, { opacity: 1 - p2, scale: 1 + p2 * 0.1 });
+            gsap.set(headingBlock, { opacity: p2, y: (1 - p2) * 40 });
+          }
+
+          // Phase 3 (0.50→0.75): Hero card
+          const p3 = Math.max(0, Math.min((p - 0.50) / 0.25, 1));
+          gsap.set(bentoGrid, { opacity: p3 });
+          const heroCard = section.querySelector(".bento-entrance-hero");
+          if (heroCard) gsap.set(heroCard, { opacity: p3, y: (1 - p3) * 60 });
+
+          // Phase 4 (0.75→1.0): Grid cards
+          const p4 = Math.max(0, Math.min((p - 0.75) / 0.25, 1));
+          [".bento-entrance-1", ".bento-entrance-2", ".bento-entrance-3"].forEach((sel, i) => {
+            const el = section.querySelector(sel);
+            if (el) {
+              const stagger = i * 0.15;
+              const ep = Math.max(0, Math.min((p4 - stagger) / (1 - stagger), 1));
+              gsap.set(el, { opacity: ep, y: (1 - ep) * 50 });
+            }
+          });
+        },
+      });
     }, section);
 
     return () => ctx.revert();
@@ -394,24 +425,60 @@ const Features = () => {
       {/* Section divider */}
       <div className="section-divider w-full" />
 
-      <div className="container mx-auto px-3 md:px-10">
-        <div className="feat-heading-block px-5 py-32 text-center">
-          <span className="feat-heading mb-6 inline-block rounded-full border border-[#CAFF29]/20 bg-[#CAFF29]/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-[#CAFF29] font-general">
-            Our Ecosystem
-          </span>
-          <h1 className="feat-heading special-font font-zentry font-black text-7xl md:text-8xl text-blue-75">
-            Welcome to
-          </h1>
-          <h1 className="feat-heading special-font font-zentry font-black text-8xl md:text-9xl shimmer-text">
-            MattrVerse
-          </h1>
-          <p className="feat-heading mx-auto mt-6 max-w-lg text-base text-slate-400 font-circular-web md:text-lg">
-            Mattr is not just a service company. We are builders at heart.
-          </p>
+      <div className="feat-intro-wrap relative overflow-hidden min-h-screen">
+        {/* ── Curtain overlays ── */}
+        <div className="feat-curtain-l pointer-events-none absolute inset-y-0 left-0 w-1/2 z-40 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-[#0a0a12] to-[#0d0a1a]" />
+          <div className="absolute inset-0 opacity-[0.04]" style={{
+            backgroundImage: "radial-gradient(circle at 1px 1px, rgba(139,92,246,0.4) 1px, transparent 0)",
+            backgroundSize: "32px 32px",
+          }} />
+          <div className="absolute top-1/3 right-0 h-[300px] w-[300px] rounded-full bg-violet-600/[0.08] blur-[120px]" />
+          <div className="absolute bottom-1/4 left-1/4 h-[200px] w-[200px] rounded-full bg-indigo-500/[0.06] blur-[100px]" />
+        </div>
+        <div className="feat-curtain-r pointer-events-none absolute inset-y-0 right-0 w-1/2 z-40 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-l from-black via-[#0a0a12] to-[#0d0a1a]" />
+          <div className="absolute inset-0 opacity-[0.04]" style={{
+            backgroundImage: "radial-gradient(circle at 1px 1px, rgba(139,92,246,0.4) 1px, transparent 0)",
+            backgroundSize: "32px 32px",
+          }} />
+          <div className="absolute top-1/3 left-0 h-[300px] w-[300px] rounded-full bg-violet-600/[0.08] blur-[120px]" />
+          <div className="absolute bottom-1/4 right-1/4 h-[200px] w-[200px] rounded-full bg-indigo-500/[0.06] blur-[100px]" />
         </div>
 
+        {/* ── Center title (shown during curtain phase) ── */}
+        <div className="feat-center-title pointer-events-none absolute top-0 left-0 right-0 h-screen z-50 flex flex-col items-center justify-center text-center">
+          {/* glow behind text */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full bg-violet-600/[0.15] blur-[150px]" />
+          <span className="relative mb-4 inline-block rounded-full border border-[#CAFF29]/20 bg-[#CAFF29]/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-[#CAFF29] font-general">
+            Our Ecosystem
+          </span>
+          <h1 className="relative special-font font-zentry font-black text-5xl sm:text-7xl md:text-8xl text-white drop-shadow-[0_0_40px_rgba(139,92,246,0.3)]">
+            Welcome to
+          </h1>
+          <h1 className="relative special-font font-zentry font-black text-6xl sm:text-8xl md:text-9xl shimmer-text drop-shadow-[0_0_60px_rgba(139,92,246,0.4)]">
+            MattrVerse
+          </h1>
+        </div>
+
+        <div className="container mx-auto px-3 md:px-10">
+          <div className="feat-heading-block px-5 py-32 text-center">
+            <span className="mb-6 inline-block rounded-full border border-[#CAFF29]/20 bg-[#CAFF29]/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-[#CAFF29] font-general">
+              Our Ecosystem
+            </span>
+            <h1 className="special-font font-zentry font-black text-5xl sm:text-7xl md:text-8xl text-blue-75">
+              Welcome to
+            </h1>
+            <h1 className="special-font font-zentry font-black text-6xl sm:text-8xl md:text-9xl shimmer-text">
+              MattrVerse
+            </h1>
+            <p className="mx-auto mt-6 max-w-lg text-base text-slate-400 font-circular-web md:text-lg">
+              Mattr is not just a service company. We are builders at heart.
+            </p>
+          </div>
+
         <div className="bento-grid">
-          <BentoTilt className="bento-entrance border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-2xl md:h-[65vh]">
+          <BentoTilt className="bento-entrance-hero border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-2xl md:h-[65vh]">
             <BentoCard
               title={<>Studios</>}
               description="Crafting digital experiences with precision — web, design, AI, and automation that fuel real growth."
@@ -419,8 +486,8 @@ const Features = () => {
             />
           </BentoTilt>
 
-          <div className="grid h-[135vh] w-full grid-cols-2 grid-rows-3 gap-5">
-            <BentoTilt className="bento-entrance bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2">
+          <div className="grid w-full grid-cols-1 gap-5 md:h-[135vh] md:grid-cols-2 md:grid-rows-3">
+            <BentoTilt className="bento-entrance-1 bento-tilt_1 row-span-1 h-72 md:h-auto md:col-span-1 md:row-span-2">
               <BentoCard
                 title={<>Labs</>}
                 description="Building bold products that simplify life and inspire innovation."
@@ -428,7 +495,7 @@ const Features = () => {
               />
             </BentoTilt>
 
-            <BentoTilt className="bento-entrance bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
+            <BentoTilt className="bento-entrance-2 bento-tilt_1 row-span-1 h-72 md:h-auto md:col-span-1">
               <BentoCard
                 title={<>Media</>}
                 description="Content that educates, empowers, and sparks curiosity in tech."
@@ -436,7 +503,7 @@ const Features = () => {
               />
             </BentoTilt>
 
-            <BentoTilt className="bento-entrance bento-tilt_1 me-14 md:col-span-1 md:me-0">
+            <BentoTilt className="bento-entrance-3 bento-tilt_1 h-72 md:h-auto md:col-span-1">
               <BentoCard
                 title={<>Buildrs Hub</>}
                 description="A community of visionaries collaborating to build what truly matters."
@@ -445,6 +512,7 @@ const Features = () => {
             </BentoTilt>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
