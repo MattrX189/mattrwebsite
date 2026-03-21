@@ -130,15 +130,30 @@ const ServiceCard = ({ svc, span, index }) => {
   return (
     <div
       ref={cardRef}
-      className={`svc-card group relative col-span-12 ${span} overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm transition-all duration-700 hover:border-white/[0.12] hover:bg-white/[0.04]`}
+      className={`svc-card group relative col-span-12 ${span} overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-md transition-all duration-500 hover:border-white/[0.15] hover:shadow-2xl`}
+      style={{
+        boxShadow: "0 0 0 0 transparent",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = `0 8px 40px ${svc.accentColor}15, 0 0 80px ${svc.accentColor}08`;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
+      }}
     >
-      {/* gradient glow on hover */}
+      {/* gradient glow — always slightly visible, stronger on hover */}
       <div
-        className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${svc.gradient} opacity-0 transition-opacity duration-700 group-hover:opacity-100`}
+        className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${svc.gradient} opacity-40 transition-opacity duration-500 group-hover:opacity-100`}
+      />
+
+      {/* accent line at top */}
+      <div
+        className="absolute top-0 left-0 right-0 h-[1px] opacity-40 transition-opacity duration-500 group-hover:opacity-80"
+        style={{ background: `linear-gradient(90deg, transparent, ${svc.accentColor}60, transparent)` }}
       />
 
       {/* large decorative number */}
-      <div className="pointer-events-none absolute -right-4 -top-6 select-none font-zentry text-[10rem] font-black leading-none text-white/[0.02] transition-all duration-700 group-hover:text-white/[0.05] md:text-[12rem]">
+      <div className="pointer-events-none absolute -right-4 -top-6 select-none font-zentry text-[10rem] font-black leading-none text-white/[0.03] transition-all duration-500 group-hover:text-white/[0.07] md:text-[12rem]">
         {svc.num}
       </div>
 
@@ -149,23 +164,24 @@ const ServiceCard = ({ svc, span, index }) => {
           <span
             className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] font-general transition-all duration-500"
             style={{
-              borderColor: `${svc.accentColor}33`,
-              color: `${svc.accentColor}cc`,
-              backgroundColor: `${svc.accentColor}0a`,
+              borderColor: `${svc.accentColor}40`,
+              color: svc.accentColor,
+              backgroundColor: `${svc.accentColor}15`,
             }}
           >
             <span
-              className="h-1.5 w-1.5 rounded-full"
+              className="h-1.5 w-1.5 rounded-full animate-pulse"
               style={{ backgroundColor: svc.accentColor }}
             />
             {svc.num} — {svc.tag}
           </span>
 
           <div
-            className="flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-500"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-500 group-hover:scale-110"
             style={{
-              borderColor: `${svc.accentColor}1a`,
-              color: `${svc.accentColor}80`,
+              borderColor: `${svc.accentColor}30`,
+              color: svc.accentColor,
+              backgroundColor: `${svc.accentColor}10`,
             }}
           >
             {svc.icon}
@@ -177,20 +193,23 @@ const ServiceCard = ({ svc, span, index }) => {
           <h3 className="font-zentry text-2xl font-black leading-tight text-white md:text-3xl lg:text-[2rem]">
             {svc.title}
           </h3>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-500 font-circular-web transition-colors duration-500 group-hover:text-slate-400">
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400 font-circular-web transition-colors duration-500 group-hover:text-slate-300">
             {svc.desc}
           </p>
 
           {/* arrow link */}
           <div className="mt-8 flex items-center gap-3">
-            <span className="text-xs font-bold uppercase tracking-[0.15em] text-white/30 font-general transition-colors duration-500 group-hover:text-white/60">
+            <span
+              className="text-xs font-bold uppercase tracking-[0.15em] font-general transition-colors duration-500"
+              style={{ color: `${svc.accentColor}60` }}
+            >
               Learn more
             </span>
             <div
               className="flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-500 group-hover:scale-110"
               style={{
-                borderColor: `${svc.accentColor}20`,
-                backgroundColor: `${svc.accentColor}08`,
+                borderColor: `${svc.accentColor}30`,
+                backgroundColor: `${svc.accentColor}15`,
               }}
             >
               <svg
@@ -273,14 +292,20 @@ const Services = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="relative w-screen overflow-hidden bg-black py-28 md:py-40"
+      className="relative w-screen overflow-hidden bg-[#050508] py-28 md:py-40"
     >
-      {/* Section divider */}
-      <div className="section-divider absolute top-0 w-full" />
+      {/* Top edge gradient line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#CAFF29]/20 to-transparent" />
+      {/* Bottom edge gradient line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
 
-      {/* subtle ambient glows */}
-      <div className="pointer-events-none absolute left-0 top-1/4 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_center,rgba(202,255,41,0.03),transparent_70%)]" />
-      <div className="pointer-events-none absolute right-0 bottom-1/4 h-[500px] w-[500px] bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.03),transparent_70%)]" />
+      {/* Noise/grain texture overlay */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")', backgroundRepeat: 'repeat', backgroundSize: '128px 128px' }} />
+
+      {/* Ambient glows — stronger */}
+      <div className="pointer-events-none absolute -left-32 top-1/4 h-[700px] w-[700px] bg-[radial-gradient(ellipse_at_center,rgba(202,255,41,0.06),transparent_70%)]" />
+      <div className="pointer-events-none absolute -right-32 bottom-1/4 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.06),transparent_70%)]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[800px] w-[800px] bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.03),transparent_70%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
         {/* ── HEADER ── */}
