@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "vite-dev",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["-e", "process.chdir('/tmp/mattrdev');import('/tmp/mattrdev/node_modules/vite/bin/vite.js')", "--", "--port", "5173"],
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": ["-C", "/Users/gaurangpant/Documents/Claude Code/mattrwebsite", "node", "node_modules/vite/bin/vite.js", "--port", "5173"],
       "port": 5173,
       "url": "http://localhost:5173"
     }

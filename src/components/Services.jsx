@@ -347,7 +347,9 @@ const Services = () => {
             Have a project in mind? Let's make it happen.
           </p>
           <a
-            href="#contact"
+            href="https://calendly.com/studios-mattr/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="magnetic-btn group inline-flex items-center gap-2.5 rounded-full bg-[#CAFF29] px-8 py-4 text-sm font-bold uppercase tracking-wider text-black transition-all duration-300 hover:bg-[#d4ff47] hover:shadow-[0_0_40px_rgba(202,255,41,0.2)] font-general"
           >
             Work With Us

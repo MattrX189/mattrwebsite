@@ -621,7 +621,9 @@ const Portfolio = () => {
         {/* ── CTA BUTTON (Phase 4) ── */}
         <div className="pf-cta-button relative mt-10">
           <a
-            href="#contact"
+            href="https://calendly.com/studios-mattr/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="magnetic-btn inline-flex items-center gap-3 rounded-full bg-[#CAFF29] px-12 py-5 font-general text-sm font-bold uppercase tracking-wider text-black transition-all duration-300 md:px-14 md:py-6 md:text-base"
           >
             Start Your Project

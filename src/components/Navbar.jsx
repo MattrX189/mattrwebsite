@@ -83,7 +83,9 @@ const NavBar = () => {
 
               {/* CTA in navbar */}
               <a
-                href="#contact"
+                href="https://calendly.com/studios-mattr/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="ml-10 inline-flex items-center gap-2 rounded-full bg-[#CAFF29] px-5 py-2 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 hover:bg-[#d4ff47] hover:shadow-[0_0_20px_rgba(202,255,41,0.3)] font-general"
               >
                 Let's Talk
@@ -148,7 +150,9 @@ const NavBar = () => {
               </a>
             ))}
             <a
-              href="#contact"
+              href="https://calendly.com/studios-mattr/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#CAFF29] px-5 py-3 text-xs font-bold uppercase tracking-wider text-black font-general"
               onClick={() => setIsMobileMenuOpen(false)}
             >

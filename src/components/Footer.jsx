@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
@@ -7,6 +7,36 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
   const footerRef = useRef(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    service: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Enter a valid email";
+    }
+    if (!formData.service) newErrors.service = "Please select a service";
+    if (!formData.message.trim()) newErrors.message = "Tell us about your project";
+    return newErrors;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
 
   useGSAP(() => {
     const el = footerRef.current;
@@ -82,16 +112,54 @@ const Footer = () => {
     return () => ctx.revert();
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Form submitted (demo). Connect API here.");
+    setSubmitError("");
+
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "61b49b79-47ff-4d64-9d7c-7ae776904db8",
+          to: "studios@mattr.co.in",
+          subject: `New Enquiry from ${formData.name} — ${formData.service}`,
+          from_name: formData.name,
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || "Not provided",
+          service: formData.service,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", company: "", service: "", message: "" });
+      } else {
+        setSubmitError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setSubmitError("Network error. Please try again later.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <footer ref={footerRef} className="relative bg-black text-white overflow-hidden" style={{ zIndex: 65 }}>
 
       {/* ═══════════ CTA + FORM SECTION ═══════════ */}
-      <div className="relative px-6 pt-4 pb-20 md:pt-6 md:pb-28">
+      <div id="contact" className="relative px-6 pt-4 pb-20 md:pt-6 md:pb-28">
         {/* background orbs */}
         <div className="cta-orb-1 pointer-events-none absolute -top-20 left-1/4 h-[400px] w-[400px] rounded-full bg-violet-600/[0.06] blur-[120px]" />
         <div className="cta-orb-2 pointer-events-none absolute bottom-0 right-1/4 h-[350px] w-[350px] rounded-full bg-[#CAFF29]/[0.04] blur-[100px]" />
@@ -157,58 +225,108 @@ const Footer = () => {
                 <h3 className="mb-6 font-zentry text-lg font-black uppercase text-white md:text-xl">
                   Send us a message
                 </h3>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
+                {submitted ? (
+                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-500/10">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-7 w-7 text-green-400">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+                    </div>
+                    <h4 className="mb-2 text-lg font-bold text-white font-zentry">Thank you!</h4>
+                    <p className="text-sm text-slate-400 font-circular-web">We'll get back to you within 24 hours.</p>
+                    <button
+                      type="button"
+                      onClick={() => setSubmitted(false)}
+                      className="mt-4 text-xs text-violet-400 underline transition-colors hover:text-white font-circular-web"
+                    >
+                      Send another message
+                    </button>
+                  </div>
+                ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3.5" noValidate>
                   <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-                    <input
-                      type="text"
-                      placeholder="First Name"
-                      className="w-full rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      required
-                      className="w-full rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web"
-                    />
+                    <div>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="First Name"
+                        className={`w-full rounded-xl border ${errors.name ? "border-red-500/50" : "border-white/[0.1]"} bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web`}
+                      />
+                      {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
+                    </div>
+                    <div>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email"
+                        className={`w-full rounded-xl border ${errors.email ? "border-red-500/50" : "border-white/[0.1]"} bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web`}
+                      />
+                      {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
+                    </div>
                   </div>
                   <input
                     type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
                     placeholder="Company Name"
                     className="w-full rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web"
                   />
-                  <select
-                    className="w-full rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web appearance-none"
-                    defaultValue=""
-                  >
-                    <option value="" disabled>What are you looking for?</option>
-                    <option value="development">Website Development</option>
-                    <option value="design">UI/UX Design</option>
-                    <option value="branding">Logo & Branding</option>
-                    <option value="ai">AI Automation</option>
-                    <option value="graphics">Banners & Social Media Graphics</option>
-                    <option value="packaging">Packaging Design</option>
-                    <option value="video">Video Editing</option>
-                    <option value="3d">3D Animation & VFX</option>
-                    <option value="other">Other</option>
-                  </select>
-                  <textarea
-                    rows="3"
-                    placeholder="Tell us about your project..."
-                    className="w-full resize-none rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web"
-                  ></textarea>
+                  <div>
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className={`w-full rounded-xl border ${errors.service ? "border-red-500/50" : "border-white/[0.1]"} bg-white/[0.04] px-4 py-3 text-sm ${formData.service ? "text-white" : "text-slate-500"} outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web appearance-none`}
+                    >
+                      <option value="" disabled>What are you looking for?</option>
+                      <option value="Website Development">Website Development</option>
+                      <option value="UI/UX Design">UI/UX Design</option>
+                      <option value="Logo & Branding">Logo & Branding</option>
+                      <option value="AI Automation">AI Automation</option>
+                      <option value="Banners & Social Media Graphics">Banners & Social Media Graphics</option>
+                      <option value="Packaging Design">Packaging Design</option>
+                      <option value="Video Editing">Video Editing</option>
+                      <option value="3D Animation & VFX">3D Animation & VFX</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    {errors.service && <p className="mt-1 text-xs text-red-400">{errors.service}</p>}
+                  </div>
+                  <div>
+                    <textarea
+                      rows="3"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell us about your project..."
+                      className={`w-full resize-none rounded-xl border ${errors.message ? "border-red-500/50" : "border-white/[0.1]"} bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-[#CAFF29]/30 focus:bg-white/[0.06] focus:shadow-[0_0_12px_rgba(202,255,41,0.05)] font-circular-web`}
+                    ></textarea>
+                    {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
+                  </div>
+                  {submitError && (
+                    <p className="text-center text-xs text-red-400">{submitError}</p>
+                  )}
                   <button
                     type="submit"
-                    className="group mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]"
+                    disabled={submitting}
+                    className="group mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Submit Enquiry
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
+                    {submitting ? "Sending..." : "Submit Enquiry"}
+                    {!submitting && (
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                      </svg>
+                    )}
                   </button>
                   <p className="mt-1 text-center text-[11px] text-slate-600 font-general">
                     We'll get back to you within 24 hours.
                   </p>
                 </form>
+                )}
               </div>
             </div>
           </div>
