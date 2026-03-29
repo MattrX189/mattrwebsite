@@ -408,7 +408,7 @@ const MattrVerse = () => {
             </h1>
           </div>
           <p className="mv-subtitle mx-auto mt-4 max-w-lg text-sm text-slate-400 font-circular-web md:text-base">
-            Mattr is not just a service company. We are builders at heart.
+            Mattr™ is not just a service company. We are builders at heart.
           </p>
         </div>
 

@@ -208,7 +208,7 @@ const AboutMattr = () => {
           <div className="am-intro mb-6 flex items-center gap-3">
             <div className="h-[1px] w-10 bg-gradient-to-r from-violet-400 to-transparent" />
             <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-violet-400 font-general">
-              About Mattr
+              About Mattr™
             </span>
           </div>
 
@@ -334,7 +334,7 @@ const AboutMattr = () => {
           </p>
           <p className="mt-3 font-circular-web text-xl md:text-2xl">
             <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent font-medium">
-              Experiences that mattr.
+              Experiences that mattr™.
             </span>
           </p>
         </div>

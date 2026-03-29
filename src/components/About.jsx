@@ -103,7 +103,7 @@ const About = () => {
   });
 
   // Split text into words for animation
-  const headingLine1 = "Mattr is not just a name.";
+  const headingLine1 = "Mattr™ is not just a name.";
   const headingLine2 = "It's a statement.";
 
   return (
@@ -190,7 +190,7 @@ const About = () => {
               <p className="font-circular-web">
                 We don't just build websites. We engineer{" "}
                 <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent font-semibold">
-                  experiences that mattr
+                  experiences that mattr™
                 </span>
                 .
               </p>

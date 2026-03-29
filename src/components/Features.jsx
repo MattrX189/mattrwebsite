@@ -473,7 +473,7 @@ const Features = () => {
               MattrVerse
             </h1>
             <p className="mx-auto mt-6 max-w-lg text-base text-slate-400 font-circular-web md:text-lg">
-              Mattr is not just a service company. We are builders at heart.
+              Mattr™ is not just a service company. We are builders at heart.
             </p>
           </div>
 

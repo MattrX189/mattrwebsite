@@ -342,7 +342,7 @@ const Footer = () => {
 
             {/* brand column */}
             <div className="ft-bottom md:col-span-4">
-              <img src="/img/logo.png" alt="Mattr" className="mb-4 h-16 w-auto md:mb-5 md:h-24" />
+              <img src="/img/logo.png" alt="Mattr™" className="mb-4 h-16 w-auto md:mb-5 md:h-24" />
               <p className="mb-4 max-w-xs text-sm leading-relaxed text-slate-500 font-circular-web md:mb-6">
                 We build digital products that don't just work — they transform. From strategy to shipping, we're your end-to-end technology partner.
               </p>
